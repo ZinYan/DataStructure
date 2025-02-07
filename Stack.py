@@ -35,11 +35,9 @@ stack3.put('a')
 stack3.put('b')
 stack3.put('c')
 print(stack3)
-
 print(stack3.qsize())
 print(stack3.full())
 print(stack3.empty())
-
 print(stack3.get())
 print('-'*50)
 
@@ -89,7 +87,6 @@ class Stack:
         if self.isEmpty():
             return None
         return self.head.next.value 
-        
 if __name__ == '__main__':
     # create a Stack instance (self=stack)
         # self.head -> Node instance 
