@@ -137,7 +137,22 @@ class LinkedList:
                 itr.next = node
                 break
             itr = itr.next
-
+    def remove_by_value(self, data):
+        # Head -> (orange,addressofstrawberry) -> (strawberry,addressofgrapes) -> (grapes,addressofbanana) -> (banana,addressofkiwi) -> (kiwi,null)
+        # data = grapes -> remove grapes
+        if self.head is None:
+            return
+        
+        if self.head.data == data:
+            self.head = self.head.next
+            return
+        
+        itr = self.head
+        while itr:
+            if itr.next.data == data:
+                itr.next = itr.next.next
+                break
+            itr = itr.next
 # add breakpoint at the start of the place where you want to debug
 if __name__ == '__main__':
     ll = LinkedList()
@@ -154,4 +169,6 @@ if __name__ == '__main__':
     ll.insert_at(1,"grapes")
     ll.print()
     ll.insert_after_value("orange","strawberry")
+    ll.print()
+    ll.remove_by_value('grapes')
     ll.print()
