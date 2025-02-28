@@ -1,11 +1,107 @@
-# Stack - Lifo
-# Functions
-    # push()
-    # pop()
-    # empty()
-    # peek()/top()
-    # size()
-# used in undo/redo features, call functions, backtracking algorithms
+'''
+Stack - Lifo
+Functions
+    push()
+    pop()
+    empty()
+    peek()/top()
+    size()
+used in undo/redo features, call functions, backtracking algorithms
+
+Time Complexity 
+    Push/Pop element : O(1)
+    Search element by value : O(n)
+Applications
+    Undoing (cmd+Z)
+    function calling in any programming language
+Implementations
+    Python
+        list
+            not recommended cuz if the capacity is full, have to allocate another memory and copy existing elements which is not efficient
+        collections.deque
+        queue.LifoQueue
+    Java
+        Stack
+        Deque
+    C++
+        std::stack
+'''
+
+# Using list
+stack = []
+stack.append('https://www.wikipedia.org/')
+stack.append('https://en.wikipedia.org/wiki/Running_Man_(TV_program)')
+stack.append('https://en.wikipedia.org/wiki/List_of_Running_Man_episodes_(2010)')
+stack.append('https://en.wikipedia.org/wiki/List_of_Running_Man_episodes_(2011)')
+print(stack.pop()) # delete and show last added link
+print(stack[-1]) # show last added link
+
+# Using coolections.deque
+from collections import deque
+stack1 = deque()
+print(dir(stack1))  # viewing methods
+stack1.append('https://www.wikipedia.org/')
+stack1.append('https://en.wikipedia.org/wiki/Running_Man_(TV_program)')
+stack1.append('https://en.wikipedia.org/wiki/List_of_Running_Man_episodes_(2010)')
+stack1.append('https://en.wikipedia.org/wiki/List_of_Running_Man_episodes_(2011)')
+print(stack1.pop())
+
+# Stack Class using deque
+class Stack:
+    def __init__(self):
+        self.stack = deque()
+    def push(self,value):
+        self.stack.append(value)
+    def pop(self):
+        return self.stack.pop()
+    def peek(self):
+        return self.stack[-1]
+    def is_empty(self):
+        return len(self.stack)==0
+    def size(self):
+        return len(self.stack)
+
+# Reversing string using stack
+def reverse_string(str):
+    stack = Stack()
+    for char in str:
+        stack.push(char)
+    new_s = ''
+    for _ in range(stack.size()):
+        new_s += stack.pop()
+    return new_s
+if __name__ == "__main__":
+    print(reverse_string("We will conquer COVID-19"))
+
+# Checking if parentheses are balanced or not using stack
+def match(ch,s):
+    m = {
+        '[' : ']',
+        '{' : '}',
+        '(' : ')'
+    }
+    return m[s] == ch
+def is_balanced(str):
+    s = Stack()
+    # ({a+b})
+    # ({ -> push
+    # } -> pop
+    for ch in str:
+        if ch == '[' or ch == '{' or ch == '(':
+            s.push(ch)
+        elif ch == ']' or ch == '}' or ch == ')':
+            if s.is_empty():
+                return False
+            if not match(ch,s.pop()):
+                return False
+    return s.is_empty()
+if __name__ == "__main__":
+    print(is_balanced("({a+b})"))
+    print(is_balanced("))((a+b}{"))
+    print(is_balanced("((a+b))"))
+    print(is_balanced("))"))
+    print(is_balanced("[a+b]*(x+2y)*{gg+kk}"))
+
 
 # Implementation using List
 stack1 = []
@@ -132,3 +228,5 @@ if __name__ == '__main__':
         print(f'Pop value: {top_value}')
     print(f'Stack: {stack}')
 print('-'*50)
+
+
